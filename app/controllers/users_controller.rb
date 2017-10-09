@@ -14,7 +14,6 @@ class ApplicationController < Sinatra::Base
     end
 
     post '/users/new' do
-      #binding.pry
       user = User.create(email: params[:email], password: params[:password], first_name: params[:first_name], last_name: params[:last_name], birthday: params[:birthday])
 
       if user.save && params[:email] != "" && params[:first_name] != "" && params[:last_name] != "" && params[:birthday] != ""
@@ -26,11 +25,16 @@ class ApplicationController < Sinatra::Base
     end
 
     get '/users/profile' do
+      #binding.pry
       @user = Helper.current_user(session)
+      @posts = []
+       Post.all.each do |post|
+         if post.user_id == @user.id
+           @posts << post
+         end
+       end
       erb :'users/profile'
     end
-
-  
 
 
 end
