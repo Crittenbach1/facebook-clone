@@ -10,7 +10,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+    if Helper.is_logged_in?(session) == true
+      redirect '/users/profile'
+    else
       erb :index
+    end
   end
 
   get '/login' do
@@ -29,7 +33,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    session = {}
+    session[:user_id] = nil
     redirect '/'
   end
 

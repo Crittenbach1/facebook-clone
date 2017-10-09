@@ -1,6 +1,12 @@
+<form action="/posts/new" method="post">
+  <input type="text" name="content" value="What's on your mind?">
+  <input type="submit" value="Post">
+</form>
+
 <% Post.all.each do |post| %>
    <%  @user = User.find(post.user_id) %>
-  <%= "#{@user.first_name} #{@user.last_name}" %> <br>
+   <%= "#{@user.first_name} #{@user.last_name}" %> <br>
    <%= "#{post.content}" %>
+
    <p>-------------------------------</p>
 <%end%>
