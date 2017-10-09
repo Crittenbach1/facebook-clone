@@ -1,8 +1,36 @@
 class ApplicationController < Sinatra::Base
-  register Sinatra::ActiveRecordExtension
-  set :session_secret, "my_application_secret"
-  set :views, Proc.new { File.join(root, "../views/") }
+  configure do
+    set :public_folder, 'public'
+    set :views, 'app/views'
+  end
 
+  configure do
+    enable :sessions
+    set :session_secret, "secret"
+  end
+
+    get '/users/new' do
+      erb :'users/signup'
+    end
+
+    post '/users/new' do
+      #binding.pry
+      user = User.create(email: params[:email], password: params[:password], first_name: params[:first_name], last_name: params[:last_name], birthday: params[:birthday])
+
+      if user.save && params[:email] != "" && params[:first_name] != "" && params[:last_name] != "" && params[:birthday] != ""
+        session[:user_id] = user.id
+        redirect '/users/profile'
+      else
+        redirect '/users/new'
+      end
+    end
+
+    get '/users/profile' do
+      @user = Helper.current_user(session)
+      erb :'users/profile'
+    end
+
+  
 
 
 end

@@ -1,0 +1,14 @@
+<form action="/logout" method="get">
+  <input type="submit" value="Log Out">
+</form>
+
+<h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
+
+<%= "#{@user.birthday}" %><br>
+
+<br>
+
+<form action="/post/new" method="post">
+  <input type="text" name="content" value="What's on your mind?">
+  <input type="submit" value="Post">
+</form>
