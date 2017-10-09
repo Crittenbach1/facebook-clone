@@ -9,6 +9,10 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "secret"
   end
 
+  get '/posts/feed' do
+    erb :'posts/feed'
+  end
+
   post '/posts/new' do
     @post = Post.create(content: params[:content], user_id: Helper.current_user(session).id)
     redirect "/posts/#{@post.id}"
@@ -19,6 +23,7 @@ class ApplicationController < Sinatra::Base
     @user = User.find(@post.user_id)
     erb :'posts/show_post'
   end
+
 
 
 
