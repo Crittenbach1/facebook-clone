@@ -1,0 +1,7 @@
+<% if @users.empty? %>
+  <%= "this post has no likes" %>
+<% else %>
+ <% @users.each do |user| %>
+   <p><%= "#{user.first_name} #{user.last_name}" %></p>
+ <% end %>
+<% end %>

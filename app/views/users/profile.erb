@@ -15,4 +15,17 @@
 
 <% @posts.each do |post| %>
 <p><%= "#{post.content}" %> </p>
+<form action="/likes/<%="#{post.id}"%>" method="post">
+  <input type="submit" name="view" value="View Likes">
+</form>
+<form action="/likes/new/<%="#{post.id}"%>" method="post">
+  <input type="submit" name="like" value="Like">
+</form>
+<form action="/likes/delete/<%="#{post.id}"%>" method="post">
+  <input type="submit" name="unlike" value="Unlike">
+</form>
+<form action="/posts/delete/<%="#{post.id}"%>" method="post">
+  <input type="submit" name="delete" value="Delete Post">
+</form>
+
 <% end %>

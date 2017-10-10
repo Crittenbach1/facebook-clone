@@ -4,9 +4,14 @@
 </form>
 
 <% Post.all.each do |post| %>
-   <%  @user = User.find(post.user_id) %>
-   <%= "#{@user.first_name} #{@user.last_name}" %> <br>
-   <%= "#{post.content}" %>
-
-   <p>-------------------------------</p>
-<%end%>
+<p><%= "#{post.content}" %> </p>
+<form action="/likes/<%="#{post.id}"%>" method="post">
+  <input type="submit" name="like" value="View Likes">
+</form>
+<form action="/likes/new/<%="#{post.id}"%>" method="post">
+  <input type="submit" name="like" value="Like">
+</form>
+<form action="/likes/delete/<%="#{post.id}"%>" method="post">
+  <input type="submit" name="like" value="Unlike">
+</form>
+<% end %>
