@@ -8,6 +8,7 @@
 </form>
 
 <% Post.all.each do |post| %>
+<p><%= "#{User.find(post.user_id).first_name} #{User.find(post.user_id).last_name}" %> </p>
 <p><%= "#{post.content}" %> </p>
 <form action="/likes/<%="#{post.id}"%>" method="post">
   <input type="submit" name="like" value="View Likes">
@@ -18,4 +19,5 @@
 <form action="/likes/delete/<%="#{post.id}"%>" method="post">
   <input type="submit" name="like" value="Unlike">
 </form>
+<p>----------------------------------</p>
 <% end %>

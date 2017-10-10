@@ -25,11 +25,11 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/posts/delete/:id' do
-    @post = Post.find(params[:id])
-    if @post.user_id == Helper.current_user(session)
+    @post = Post.find(params[:id].to_i)
+    if @post.user_id == Helper.current_user(session).id
       @post.delete
     end
-    erb :'posts/feed'
+    redirect 'posts/feed'
   end
 
 end
