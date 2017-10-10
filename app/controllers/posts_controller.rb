@@ -10,7 +10,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/posts/feed' do
-    erb :'posts/feed'
+    if Helper.is_logged_in?(session) == false
+      redirect '/login'
+    else
+      erb :'posts/feed'
+    end
   end
 
   post '/posts/new' do

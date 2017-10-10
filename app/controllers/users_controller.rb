@@ -25,15 +25,18 @@ class ApplicationController < Sinatra::Base
     end
 
     get '/users/profile' do
-      #binding.pry
-      @user = Helper.current_user(session)
-      @posts = []
+      if Helper.is_logged_in?(session) == false
+        redirect '/login'
+      else
+       @user = Helper.current_user(session)
+       @posts = []
        Post.all.each do |post|
          if post.user_id == @user.id
            @posts << post
          end
        end
       erb :'users/profile'
+     end
     end
 
 
