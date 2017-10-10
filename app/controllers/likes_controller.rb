@@ -13,7 +13,7 @@ class ApplicationController < Sinatra::Base
     @liked = false
     PostLike.all.each do |pl|
        like = Like.find(pl.like_id)
-       if like.user_id == Helper.current_user(session)
+       if like.user_id == Helper.current_user(session).id
          @liked = true
        end
     end
