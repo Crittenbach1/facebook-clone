@@ -26,8 +26,9 @@ class ApplicationController < Sinatra::Base
     @post = Post.find(params[:id].to_i)
     if @post.user_id != Helper.current_user(session).id
       erb :error
+    else
+     erb :"posts/edit_post"
     end
-    erb :"posts/edit_post"
   end
 
   post '/posts/edit/:id' do
