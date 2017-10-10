@@ -10,10 +10,11 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/likes/new/:id' do
+    binding
     @liked = false
     PostLike.all.each do |pl|
        like = Like.find(pl.like_id)
-       if like.user_id == Helper.current_user(session).id
+       if like.user_id == Helper.current_user(session).id && pl.post_id == params[:id].to_i
          @liked = true
        end
     end
@@ -35,7 +36,6 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/likes/:id' do
-
     @likes = []
     PostLike.all.each do |pl|
       if pl.post_id == params[:id].to_i
