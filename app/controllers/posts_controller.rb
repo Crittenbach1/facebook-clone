@@ -24,10 +24,12 @@ class ApplicationController < Sinatra::Base
     erb :'posts/show_post'
   end
 
-  get '/posts/:id/delete' do
+  post '/posts/delete/:id' do
     @post = Post.find(params[:id])
-    
-    erb :'posts/show_post'
+    if @post.user_id == Helper.current_user(session)
+      @post.delete
+    end
+    erb :'posts/feed'
   end
 
 end
