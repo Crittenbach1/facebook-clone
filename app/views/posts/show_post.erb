@@ -4,6 +4,10 @@
 <%= "#{@post.content}" %>
 <br>
 
+<form action="/posts/edit/<%="#{@post.id}"%>" method="get">
+  <input type="submit" name="profile" value="Edit">
+</form><br>
+
 <p>-----------------------------------------------</p>
 
 <form action="/users/profile" method="get">

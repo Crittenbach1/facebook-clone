@@ -1,0 +1,5 @@
+<%= @post.content %>
+<form action="/posts/edit/<%="#{@post.id}"%>" method="post">
+  <input type="text" name="content" value="edit post here">
+  <input type="submit" value="edit">
+</form>

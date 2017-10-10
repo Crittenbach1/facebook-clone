@@ -19,5 +19,8 @@
 <form action="/likes/delete/<%="#{post.id}"%>" method="post">
   <input type="submit" name="like" value="Unlike">
 </form>
+<form action="/posts/edit/<%="#{post.id}"%>" method="get">
+  <input type="submit" name="edit" value="Edit">
+</form><br>
 <p>----------------------------------</p>
 <% end %>

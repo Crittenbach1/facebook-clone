@@ -22,6 +22,21 @@ class ApplicationController < Sinatra::Base
     redirect "/posts/#{@post.id}"
   end
 
+  get '/posts/edit/:id' do
+    @post = Post.find(params[:id].to_i)
+    if @post.user_id != Helper.current_user(session).id
+      erb :error
+    end
+    erb :"posts/edit_post"
+  end
+
+  post '/posts/edit/:id' do
+    @post = Post.find(params[:id].to_i)
+    @post.content = params[:content]
+    @post.save
+    redirect "posts/#{@post.id}"
+  end
+
   get '/posts/:id' do
     @post = Post.find(params[:id])
     @user = User.find(@post.user_id)
@@ -32,6 +47,8 @@ class ApplicationController < Sinatra::Base
     @post = Post.find(params[:id].to_i)
     if @post.user_id == Helper.current_user(session).id
       @post.delete
+    else
+      erb :error
     end
     redirect 'posts/feed'
   end
